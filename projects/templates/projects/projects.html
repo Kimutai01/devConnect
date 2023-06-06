@@ -1,25 +1,5 @@
 {% extends 'main.html' %} {% block content %}
 
-<table>
-  <tr>
-    <th>ID</th>
-    <th>Project</th>
-    <th>created</th>
-    <th></th>
-    <th></th>
-  </tr>
-  {% for project in projects %}
-  <tr>
-    <td>{{project.id}}</td>
-    <td>{{project.title}}</td>
-    <td>{{project.created}}</td>
-    <td><a href="{% url 'project' project.id %}">View</a></td>
-    <td><a href="{% url 'delete-project' project.id %}">Delete</a></td>
-    <td><a href="{% url 'update-project' project.id %}">Edit</a></td>
-  </tr>
-  {% endfor %}
-</table>
-
 <main class="projects">
   <section class="hero-section text-center">
     <div class="container container--narrow">
