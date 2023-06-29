@@ -71,3 +71,12 @@ def userProfile(request,pk):
     otherSkills = profile.skill_set.filter(description="")
     context = {'profile': profile, 'top':topSkills, 'otherSkills':otherSkills}
     return render(request, 'users/user-profile.html', context)
+
+@login_required(login_url='login')
+def userAccount(request):
+    profile= request.user.profile
+    topSkills = profile.skill_set.all()
+    projects = profile.project_set.all
+    print(topSkills)
+    context={'profile':profile, 'top':topSkills, 'projects':projects}
+    return render(request, 'users/account.html', context)
