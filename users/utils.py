@@ -5,7 +5,7 @@ def searchProfiles(request):
     
     if request.GET.get('text'):
         search_query = request.GET.get('text')
-        print('SEARCH:', search_query)
+       
         
     skills = Skill.objects.filter(name__icontains=search_query)
     profiles =Profile.objects.distinct().filter(Q(name__icontains=search_query) | Q(short_intro__icontains=search_query) | Q(skill__in=skills))
