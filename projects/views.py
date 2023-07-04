@@ -8,11 +8,24 @@ from django.contrib.auth.decorators import login_required
 from .forms import ProjectForm 
 from .utils import searchProjects
 
+from django.core.paginator import Paginator,PageNotAnInteger, EmptyPage
+
 
 
 def projects(request):
     projects, search_query = searchProjects(request)
     
+    page = request.GET.get('page')
+    results = 3
+    paginator = Paginator(projects, results)
+    try:
+        projects = paginator.page(page)
+    except PageNotAnInteger:
+        page=1
+        projects = paginator.page(page)
+    except EmptyPage:
+        page = paginator.num_pages
+        projects = paginator.page(page)
 
     context={'projects':projects, 'search_query':search_query}
     return render(request,'projects/projects.html',context)
